@@ -12,6 +12,8 @@ namespace Vista
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new Form1());
+
+            //comentario de ejemplo
         }
     }
 }
