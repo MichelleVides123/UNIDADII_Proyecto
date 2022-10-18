@@ -1,4 +1,5 @@
 ﻿using Datos;
+using Entidades;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,6 +20,8 @@ namespace Vista
         }
 
         UsuarioDatos userDatos = new UsuarioDatos();
+        string tipooperacion = string.Empty;
+        Usuario user;
 
         private void UsuariosForm_Load(object sender, EventArgs e)
         {
@@ -33,6 +36,7 @@ namespace Vista
         private void Nuevobutton_Click(object sender, EventArgs e)
         {
             habilitarcontroles();
+            tipooperacion = "Nuevo";
         }
 
         private void habilitarcontroles()
@@ -71,6 +75,147 @@ namespace Vista
             limpiarcontroles();
         }
 
-        
+        private void modificarbutton_Click(object sender, EventArgs e)
+        {
+            tipooperacion = "Moidficar";
+
+            if (UsuariosdataGridView.SelectedRows.Count > 0)
+            {
+                codigoTextBox.Text = UsuariosdataGridView.CurrentRow.Cells["Codigo"].Value.ToString();
+                nombretextBox.Text = UsuariosdataGridView.CurrentRow.Cells["nombre"].Value.ToString();
+                clavetextBox.Text = UsuariosdataGridView.CurrentRow.Cells["clave"].Value.ToString();
+                correotextBox.Text = UsuariosdataGridView.CurrentRow.Cells["correo"].Value.ToString();
+                rolcomboBox.Text = UsuariosdataGridView.CurrentRow.Cells["rol"].Value.ToString();
+                estadoactcheckBox.Checked = Convert.ToBoolean(UsuariosdataGridView.CurrentRow.Cells["rol"].Value.ToString());
+                habilitarcontroles();
+                codigoTextBox.ReadOnly = true;
+            }
+            else 
+            {
+                MessageBox.Show("Debe seleccionar un registro", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private async void guardarbutton_Click(object sender, EventArgs e)
+        {
+            user = new Usuario();
+
+            if (tipooperacion == "Nuevo")
+            {
+                if (codigoTextBox.Text == "")
+                {
+                    errorProvider1.SetError(codigoTextBox, "Ingrese un codigo");
+                    codigoTextBox.Focus();
+                    return;
+                }
+                if (string.IsNullOrEmpty(nombretextBox.Text))
+                {
+                    errorProvider1.SetError(nombretextBox, "Ingrese un nombre");
+                    nombretextBox.Focus();
+                    return;
+                }
+                if (string.IsNullOrEmpty(clavetextBox.Text))
+                {
+                    errorProvider1.SetError(clavetextBox, "Ingrese un clave");
+                    clavetextBox.Focus();
+                    return;
+                }
+                if (string.IsNullOrEmpty(rolcomboBox.Text))
+                {
+                    errorProvider1.SetError(rolcomboBox, "Ingrese un rol");
+                    rolcomboBox.Focus();
+                    return;
+                }
+
+                user.Codigo = codigoTextBox.Text;
+                user.Nombre = nombretextBox.Text;
+                user.Clave = clavetextBox.Text;
+                user.Correo = correotextBox.Text;
+                user.Rol = rolcomboBox.Text;
+                user.EstadoActivo = estadoactcheckBox.Checked;
+
+                bool inserto = await userDatos.InsertarAsync(user);
+
+                if (inserto)
+                {
+                    LlenarDataGrid();
+                    limpiarcontroles();
+                    deshabilitarcontroles();
+                    MessageBox.Show("Usuario Guardado", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Usuario no se pudo guardar", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+            else if (tipooperacion == "Modificar")
+            {
+                if (codigoTextBox.Text == "")
+                {
+                    errorProvider1.SetError(codigoTextBox, "Ingrese un codigo");
+                    codigoTextBox.Focus();
+                    return;
+                }
+                if (string.IsNullOrEmpty(nombretextBox.Text))
+                {
+                    errorProvider1.SetError(nombretextBox, "Ingrese un nombre");
+                    nombretextBox.Focus();
+                    return;
+                }
+                if (string.IsNullOrEmpty(clavetextBox.Text))
+                {
+                    errorProvider1.SetError(clavetextBox, "Ingrese un clave");
+                    clavetextBox.Focus();
+                    return;
+                }
+                if (string.IsNullOrEmpty(rolcomboBox.Text))
+                {
+                    errorProvider1.SetError(rolcomboBox, "Ingrese un rol");
+                    rolcomboBox.Focus();
+                    return;
+                }
+
+                user.Codigo = codigoTextBox.Text;
+                user.Nombre = nombretextBox.Text;
+                user.Clave = clavetextBox.Text;
+                user.Correo = correotextBox.Text;
+                user.Rol = rolcomboBox.Text;
+                user.EstadoActivo = estadoactcheckBox.Checked;
+
+                bool modifico = await userDatos.ActualizarAsync(user);
+
+                if (modifico)
+                {
+                    LlenarDataGrid();
+                    limpiarcontroles();
+                    deshabilitarcontroles();
+                    MessageBox.Show("Usuario Guardado", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Usuario no se pudo guardar", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+
+        }
+
+        private async void eliminarbutton_Click(object sender, EventArgs e)
+        {
+            if (UsuariosdataGridView.SelectedRows.Count > 0)
+            {
+                bool elimino = await userDatos.EliminarAsync(UsuariosdataGridView.CurrentRow.Cells["codigo"].Value.ToString());
+                if (elimino)
+                {
+                    LlenarDataGrid();
+                    MessageBox.Show("Usuario Eliminado", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Usuario no se pudo eliminar", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.codigoTextBox = new System.Windows.Forms.TextBox();
             this.nombretextBox = new System.Windows.Forms.TextBox();
@@ -46,7 +47,9 @@
             this.guardarbutton = new System.Windows.Forms.Button();
             this.eliminarbutton = new System.Windows.Forms.Button();
             this.cancelarbutton = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.UsuariosdataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -177,7 +180,7 @@
             this.UsuariosdataGridView.Location = new System.Drawing.Point(2, 276);
             this.UsuariosdataGridView.Name = "UsuariosdataGridView";
             this.UsuariosdataGridView.RowTemplate.Height = 25;
-            this.UsuariosdataGridView.Size = new System.Drawing.Size(731, 180);
+            this.UsuariosdataGridView.Size = new System.Drawing.Size(759, 78);
             this.UsuariosdataGridView.TabIndex = 13;
             // 
             // modificarbutton
@@ -197,6 +200,7 @@
             this.guardarbutton.TabIndex = 15;
             this.guardarbutton.Text = "Guardar";
             this.guardarbutton.UseVisualStyleBackColor = true;
+            this.guardarbutton.Click += new System.EventHandler(this.guardarbutton_Click);
             // 
             // eliminarbutton
             // 
@@ -206,6 +210,7 @@
             this.eliminarbutton.TabIndex = 16;
             this.eliminarbutton.Text = "Eliminar";
             this.eliminarbutton.UseVisualStyleBackColor = true;
+            this.eliminarbutton.Click += new System.EventHandler(this.eliminarbutton_Click);
             // 
             // cancelarbutton
             // 
@@ -217,11 +222,15 @@
             this.cancelarbutton.UseVisualStyleBackColor = true;
             this.cancelarbutton.Click += new System.EventHandler(this.cancelarbutton_Click);
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // UsuariosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(735, 458);
+            this.ClientSize = new System.Drawing.Size(763, 356);
             this.Controls.Add(this.cancelarbutton);
             this.Controls.Add(this.eliminarbutton);
             this.Controls.Add(this.guardarbutton);
@@ -244,6 +253,7 @@
             this.Text = "UsuariosForm";
             this.Load += new System.EventHandler(this.UsuariosForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.UsuariosdataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -269,5 +279,6 @@
         private Button guardarbutton;
         private Button eliminarbutton;
         private Button cancelarbutton;
+        private ErrorProvider errorProvider1;
     }
 }
