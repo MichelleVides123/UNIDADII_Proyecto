@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.codigotextBox = new System.Windows.Forms.TextBox();
             this.descripciontextBox = new System.Windows.Forms.TextBox();
@@ -46,8 +47,10 @@
             this.modificarbutton = new System.Windows.Forms.Button();
             this.Nuevobutton = new System.Windows.Forms.Button();
             this.productodataGridView = new System.Windows.Forms.DataGridView();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productodataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -91,6 +94,7 @@
             this.preciotextBox.Name = "preciotextBox";
             this.preciotextBox.Size = new System.Drawing.Size(198, 23);
             this.preciotextBox.TabIndex = 7;
+            this.preciotextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.preciotextBox_KeyPress);
             // 
             // label3
             // 
@@ -108,6 +112,7 @@
             this.existenciatextBox.Name = "existenciatextBox";
             this.existenciatextBox.Size = new System.Drawing.Size(198, 23);
             this.existenciatextBox.TabIndex = 5;
+            this.existenciatextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.existenciatextBox_KeyPress);
             // 
             // label4
             // 
@@ -142,6 +147,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(429, 29);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(265, 188);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
             // 
@@ -153,6 +159,7 @@
             this.adjuntarbutton.TabIndex = 11;
             this.adjuntarbutton.Text = "Adjuntar...";
             this.adjuntarbutton.UseVisualStyleBackColor = true;
+            this.adjuntarbutton.Click += new System.EventHandler(this.adjuntarbutton_Click);
             // 
             // cancelarbutton
             // 
@@ -171,6 +178,7 @@
             this.eliminarbutton.TabIndex = 21;
             this.eliminarbutton.Text = "Eliminar";
             this.eliminarbutton.UseVisualStyleBackColor = true;
+            this.eliminarbutton.Click += new System.EventHandler(this.eliminarbutton_Click);
             // 
             // guardarbutton
             // 
@@ -180,6 +188,7 @@
             this.guardarbutton.TabIndex = 20;
             this.guardarbutton.Text = "Guardar";
             this.guardarbutton.UseVisualStyleBackColor = true;
+            this.guardarbutton.Click += new System.EventHandler(this.guardarbutton_Click);
             // 
             // modificarbutton
             // 
@@ -189,6 +198,7 @@
             this.modificarbutton.TabIndex = 19;
             this.modificarbutton.Text = "Modificar";
             this.modificarbutton.UseVisualStyleBackColor = true;
+            this.modificarbutton.Click += new System.EventHandler(this.modificarbutton_Click);
             // 
             // Nuevobutton
             // 
@@ -211,6 +221,10 @@
             this.productodataGridView.RowTemplate.Height = 25;
             this.productodataGridView.Size = new System.Drawing.Size(778, 133);
             this.productodataGridView.TabIndex = 23;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // imagenProductosForm
             // 
@@ -240,6 +254,7 @@
             this.Load += new System.EventHandler(this.imagenProductosForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productodataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -265,5 +280,6 @@
         private Button modificarbutton;
         private Button Nuevobutton;
         private DataGridView productodataGridView;
+        private ErrorProvider errorProvider1;
     }
 }

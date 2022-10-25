@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entidades;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,6 +22,16 @@ namespace Vista
         {
             UsuariosForm usuariosForm = new UsuariosForm();
             usuariosForm.Show();
+        }
+
+        private void listaDeProductosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Producto productosform = new Producto();
+            //productosform.Show();
+
+            //se podira cambiar
+            imagenProductosForm productosForm = new imagenProductosForm();
+            productosForm.Show();
         }
     }
 }
